@@ -1,8 +1,18 @@
+#include "media.h"
 class Games : public Media {
+public:
 	Games();
-	char[80] publisher;
-	float rating;
-	virtual void test2 {
-       		cout << "test" << endl;
-	}
+	~Games();
+protected:
+#if 0
+        ~Media();
+#endif
+	char publisher[80];
+	char rating[80];
+	
+	char* getPublisher();
+        void setPublisher(char*);
+        char* getRating();
+        void setRating(char*);
+	void getInfo(); //gets defined in games.cpp
 };
