@@ -1,6 +1,13 @@
 #include "music.h"
 #include <iostream>
 
+#if 0
+Justin Iness
+12/5/2021
+C++ Programming
+Learning about Classes by making a database of media
+#endif
+
 using namespace std;
 // output fields: title, artist, year, duration, publisher
 void Music::getInfo() {
@@ -11,7 +18,7 @@ void Music::getInfo() {
 
 
 }
-Music::Music() {
+Music::Music() { // constructor and ask info
 	char tempBuff[80];
         cout << "Please enter the artist:  ";
         cin.getline(tempBuff, 79);
@@ -25,11 +32,11 @@ Music::Music() {
         cin.getline(tempBuff, 79);
         this->setPublisher(tempBuff);
 }
-Music::~Music() {
+Music::~Music() { // destructor
         cout << "Music destructor called" << endl;
 }
 
-
+//getters and setters
 char* Music::getArtist() {
         return this->artist;
 }
