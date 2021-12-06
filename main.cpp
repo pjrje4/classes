@@ -16,13 +16,13 @@
  */
 using namespace std;
 
-void addMedia(vector<Media*>*);
-void delMedia(vector<Media*>*);
-void searchMedia(vector<Media*>*);
+void addMedia(vector<Media*>&);
+void delMedia(vector<Media*>&);
+void searchMedia(vector<Media*>&);
 
 
 int main() {
-	vector<Media*>* media = new vector<Media*>();
+	vector<Media*> media;
 	while (true) { //loop
 		char input[20];
 		cout << "Enter a command (ADD, SEARCH, DELETE, QUIT): ";
@@ -42,7 +42,7 @@ int main() {
 	}
 }
 
-void addMedia(vector<Media*>* in) {
+void addMedia(vector<Media*>& in) {
 	char inTitle[80];
 	char type[10];
 	char inYear[10];
@@ -62,10 +62,10 @@ void addMedia(vector<Media*>* in) {
         }
 
 	if (m != NULL) {
-		in->push_back(m);
+		in.push_back(m);
 	}
 }
-void delMedia(vector<Media*>* in) {
+void delMedia(vector<Media*>& in) {
 	char inTitle[50];
 	char inYear[10];
 	char input[20];
@@ -75,7 +75,7 @@ void delMedia(vector<Media*>* in) {
 	if (strcmp(input, "TITLE") == 0) { //del by title
 		cout << "Please enter title:  ";
                 cin.getline(inTitle, 49);
-                for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+                for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
                         if (strcmp((*i)->getTitle(), inTitle) == 0) { // if the input = title
                                  (*i)->getInfo(); // output info
                         }
@@ -86,12 +86,12 @@ void delMedia(vector<Media*>* in) {
                         while (del == true){
 				int index = 0;
                                 del = false;
-                                for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+                                for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
                                         if (strcmp((*i)->getTitle(), inTitle) == 0) { // if the input = year
-						delete (*in)[index]; // will invoke all destructors
+						delete in[index]; // will invoke all destructors
 						                     // due to media destructor
 								     // being virtual
-						in->erase(i); // delete student
+						in.erase(i); // delete student
                                                 del = true;
                                                 break;
                                         }
@@ -106,7 +106,7 @@ void delMedia(vector<Media*>* in) {
         else if (strcmp(input, "YEAR") == 0) { //print students
 		cout << "Please enter year:  ";
 		cin.getline(inYear, 9);
-		for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+		for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
                 	if (strcmp((*i)->getYear(), inYear) ==0) { // if the input = year
 				 (*i)->getInfo(); // output info
 			}
@@ -117,13 +117,13 @@ void delMedia(vector<Media*>* in) {
 			while (del == true){
 				int index = 0;
 				del = false;
-                		for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+                		for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
                         		if (strcmp((*i)->getYear(), inYear) == 0) { // if the input = year
 
-						delete (*in)[index]; // will invoke all destructors
+						delete in[index]; // will invoke all destructors
 						                     // due to media destructor
 								     // being virtual
-                                		in->erase(i); // delete student
+                                		in.erase(i); // delete student
 						del = true;
 	        	        	        break;
                         		}
@@ -136,7 +136,7 @@ void delMedia(vector<Media*>* in) {
         }
 }
 
-void searchMedia(vector<Media*>* in) {
+void searchMedia(vector<Media*>& in) {
         char inTitle[50];
         char inYear[10];
         char input[20];
@@ -145,7 +145,7 @@ void searchMedia(vector<Media*>* in) {
         if (strcmp(input, "TITLE") == 0) { //by title
 		cout << "Please enter title:  ";
                 cin.getline(inTitle, 49);
-                for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+                for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
 			if (strcmp((*i)->getTitle(), inTitle) == 0) { // if the input = title
                                  (*i)->getInfo(); // output info
                         }
@@ -154,7 +154,7 @@ void searchMedia(vector<Media*>* in) {
         else if (strcmp(input, "YEAR") == 0) { //by year
                 cout << "Please enter year:  ";
                 cin.getline(inYear, 9);
-                for (vector<Media*>::iterator i = in->begin(); i != in->end(); i++) { //iterate vector
+                for (vector<Media*>::iterator i = in.begin(); i != in.end(); i++) { //iterate vector
                         if (strcmp((*i)->getYear(), inYear) ==0) { // if the input = year
 				(*i)->getInfo(); // output info
                         }
